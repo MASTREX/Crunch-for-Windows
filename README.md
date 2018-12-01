@@ -2,9 +2,9 @@
 Password creation Tool
 
 
-#Command
+# Command
 
-crunch min max charset options
+>crunch min max charset options
 
 The min and max are the minimum and maximum lengths (respectively) for your desired wordlist. By default charset is not required, but
 you can use it to limit the characters of your wordlist to the ones you specify. If you choose to use charset then you must maintain
