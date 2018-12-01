@@ -1,0 +1,66 @@
+
+> crunch min max charset options
+
+The min and max are the minimum and maximum lengths (respectively) for your desired wordlist. By default charset is not required, but
+you can use it to limit the characters of your wordlist to the ones you specify. If you choose to use charset then you must maintain
+the correct order, which is lowUP123@%# (lowercase letters, then uppercase letters, then numbers and finally symbols). You can skip
+any of them, but the order must always remain the same.
+
+
+Examples:
+
+> crunch 2 6 qrs347
+
+The command above will produce a wordlist for every possible combination of the characters qrs347 from 2 to 6 characters in length.
+
+Now let's look at the options.
+
+-b : the maximum size of the wordlist (requires -o START)
+-c : numbers of lines to write to the wordlist (requires -o START)
+-d : limit the number of duplicate characters
+-e : stop generating words at a certain string
+-f : specify a list of character sets from the charset.lst file
+-i : invert the order of characters in the wordlist
+-l : allows the literal interpretation of @,%^ when using -t
+-o : the output wordlist file
+-p : print permutations without repeating characters (cannot be used with -s)
+-q : Like the -p option except it reads the strings from a specified file
+-r : resume a previous session (cannot be used with -s)
+-s : specify a particular string to begin the wordlist with
+-t : set a specific pattern of @,%^
+-z : compress the output wordlist file, accompanied by -o
+
+Reference:
+@ represents lowercase letters
+, represents uppercase letters
+% represents numbers
+^ represents special characters
+
+Examples:
+
+1) > crunch 5 5 abcde14 -t @@@14 -d 2@ -o syskey.txt -z
+
+A zipped syskey.txt wordlist starting with "aab14" and ending in "eed14" will be produced from the above. The reason why the start is
+not "aaa14" is because -d 2@ allows for only 2 duplicate lowercase letters. Adding -i would invert the results, and adding -e dde14
+would stop after the line "dde14" (or "41edd" in the case of an inverted output) is produced.
+
+2) > crunch 5 5 bcopuw2468 -s cow28 -c 33 -b 20mb -o START
+
+The above will result in a 20mb text file and containing combinations for bcopuw2468 starting with "cow28" and ending on the 33rd
+line of the theoretical outcome.
+
+3) > crunch 2 4 -p kite sky car -o owl.txt
+
+In this example the words 'kite' 'sky' and 'car' will be printed in all orders possible (wholly, not by letter) and outputted into
+output owl.txt without taking into account the min and max numbers. None of the words will be repeated. If only one word is included,
+it will will be used as a character set. You could use -q instead of -p to extract words from a specific file.
+
+4) > crunch 6 6 -t @^42%3 -l a^aaaa -o art.txt
+
+In this case Crunch will will treat the ^ symbol as itself, rather than a representative of a special character. The sequence will
+commence with "a^4213" and end in "z^4293" and the output art.txt will be produced.
+
+5) > crunch 4 6 -f /path/to/charset.lst -o words.txt
+
+Assume the situation where you enter the above command and then decide to pause the process midway. When you come back later, you
+may restore the session by adding -r option to the syntax, while keeping the rest exactly the same.
