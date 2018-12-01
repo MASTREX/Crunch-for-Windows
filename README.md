@@ -1,4 +1,4 @@
-# Crunch-for-Windows
+- # Crunch-for-Windows
 Password creation Tool
 
 
@@ -36,7 +36,8 @@ Options:
 - -z : compress the output wordlist file, accompanied by -o
 
 Reference:
-@ represents lowercase letters
-, represents uppercase letters
-% represents numbers
-^ represents special characters
+
+- @ represents lowercase letters
+- , represents uppercase letters
+- % represents numbers
+- ^ represents special characters
